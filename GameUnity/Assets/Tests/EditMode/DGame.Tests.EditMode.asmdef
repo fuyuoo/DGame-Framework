@@ -1,0 +1,7 @@
+{
+    "name": "DGame.Tests.EditMode",
+    "references": ["DGame.Runtime"],
+    "includePlatforms": ["Editor"],
+    "optionalUnityReferences": ["TestAssemblies"],
+    "autoReferenced": false
+}

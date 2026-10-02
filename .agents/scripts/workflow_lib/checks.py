@@ -14,9 +14,6 @@ from . import evaluations
 from . import luban
 
 SKILLS = ("dgame-dev", "unity-cli", "luban-dev", "fantasy-net")
-# skill-creator is a bundled auxiliary skill used to maintain skills; it is not a
-# DGame routing domain and is intentionally excluded from project skill discovery.
-AUXILIARY_SKILLS = {"skill-creator"}
 
 
 def behavior_scenarios(context):
@@ -43,11 +40,6 @@ def behavior_scenarios(context):
 def structure(context):
     root = context.scripts.parent
     errors = []
-    skill_root = root / "skills"
-    discovered = sorted(path.parent.name for path in skill_root.glob("*/SKILL.md")
-                        if path.parent.name not in AUXILIARY_SKILLS)
-    if discovered != sorted(SKILLS):
-        errors.append(f"Expected project skills {SKILLS}, got {discovered}")
     try:
         import yaml
     except ImportError:

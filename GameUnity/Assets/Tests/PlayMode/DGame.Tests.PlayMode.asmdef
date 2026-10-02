@@ -1,0 +1,6 @@
+{
+    "name": "DGame.Tests.PlayMode",
+    "references": ["DGame.Runtime"],
+    "optionalUnityReferences": ["TestAssemblies"],
+    "autoReferenced": false
+}

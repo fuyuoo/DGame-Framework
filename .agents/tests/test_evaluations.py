@@ -85,6 +85,21 @@ class EvaluationTests(unittest.TestCase):
                 checks.structure(Context())
             validator.assert_called_once()
 
+    def test_structure_allows_additional_skills(self):
+        context = Context()
+        skill_root = context.scripts.parent / "skills"
+        discovered = list(skill_root.glob("*/SKILL.md")) + [skill_root / "extra-skill" / "SKILL.md"]
+        original_glob = Path.glob
+        def glob(path, pattern, **kwargs):
+            return iter(discovered) if path == skill_root else original_glob(path, pattern, **kwargs)
+        with patch.object(Path, "glob", glob):
+            self.assertEqual(checks.structure(context)["skills"], list(checks.SKILLS))
+
+    def test_structure_still_requires_project_skills(self):
+        with patch.object(checks, "SKILLS", (*checks.SKILLS, "missing-required-skill")):
+            with self.assertRaisesRegex(WorkflowError, "Missing skill: .*missing-required-skill"):
+                checks.structure(Context())
+
     def test_success_records_answer_and_rule_evidence(self):
         answer = {"id": 3, "source": "unit-test fixture", "output": self.output}
         code, report, artifact = self.execute([answer])
