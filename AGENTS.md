@@ -80,3 +80,17 @@
 
 - 修复问题时先确定可复现条件，再用针对性检查确认修复。
 - 多阶段任务为每一步指定验证方式；无法验证时明确说明限制。
+
+## Agent skills
+
+### Issue tracker
+
+任务和规格使用 GitHub Issues；操作前读取 [docs/agents/issue-tracker.md](docs/agents/issue-tracker.md)。
+
+### Triage labels
+
+分流使用五个默认状态标签；操作前读取 [docs/agents/triage-labels.md](docs/agents/triage-labels.md)。
+
+### Domain docs
+
+采用单一上下文布局；探索领域概念或架构决策前读取 [docs/agents/domain.md](docs/agents/domain.md)。
